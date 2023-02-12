@@ -34,7 +34,7 @@ function App() {
                 </div>
                 {selectedUser && users && (
                     <div
-                        className={`transform h-screen bg-slate-300 overflow-auto ${
+                        className={`transform h-screen bg-gray-300 overflow-auto ${
                             isMenuOpen
                                 ? 'translate-x-0 w-2/3 fixed top-0 right-0 ease-in-out'
                                 : 'translate-x-full w-0'
@@ -64,8 +64,8 @@ function App() {
                             onClick={() => setIsFormReadOnly(!isFormReadOnly)}
                             className={`${
                                 isFormReadOnly
-                                    ? 'bg-slate-200 hover:bg-slate-500 hover:outline-slate-100 hover:outline'
-                                    : 'bg-slate-400 outline-slate-200 outline'
+                                    ? 'bg-gray-200 hover:bg-gray-500 hover:outline-gray-100 hover:outline'
+                                    : 'bg-gray-400 outline-gray-200 outline'
                             } rounded-xl w-[48px] h-[48px] cursor-pointer m-8 shadow`}
                         >
                             <img src={'./edit.svg'} />
