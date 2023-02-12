@@ -64,8 +64,8 @@ function App() {
                             onClick={() => setIsFormReadOnly(!isFormReadOnly)}
                             className={`${
                                 isFormReadOnly
-                                    ? 'bg-slate-200 hover:bg-slate-400'
-                                    : 'bg-slate-500'
+                                    ? 'bg-slate-200 hover:bg-slate-500 hover:outline-slate-100 hover:outline'
+                                    : 'bg-slate-400 outline-slate-200 outline'
                             } rounded-xl w-[48px] h-[48px] cursor-pointer m-8 shadow`}
                         >
                             <img src={'./edit.svg'} />
