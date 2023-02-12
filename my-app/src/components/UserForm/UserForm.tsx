@@ -1,4 +1,5 @@
 import { User, UserInputs } from '../../types/types'
+import LabelsComboBox from '../LabelsComboBox/LabelsComboBox'
 
 interface UserFormProps {
     selectedUser: User
@@ -176,7 +177,7 @@ export const UserForm = ({
                     />
                 </div>
             </div>
-            <div className="md:flex md:items-center mb-6">
+            {/* <div className="md:flex md:items-center mb-6">
                 <div className="md:w-1/3">
                     <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
                         Labels
@@ -188,14 +189,21 @@ export const UserForm = ({
                             isFormReadOnly ? '' : 'focus:bg-white'
                         } bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
                         type="text"
-                        placeholder={selectedUser?.labels}
+                        placeholder={selectedUser?.labels.join()}
                         readOnly={isFormReadOnly}
                         name="labels"
                         onChange={handleChange}
                         value={inputs?.labels || ''}
                     />
                 </div>
-            </div>
+            </div> */}
+
+            <LabelsComboBox
+                isFormReadOnly={isFormReadOnly}
+                selectedUserLabelsInput={inputs?.labels || selectedUser.labels}
+                setInputs={setInputs}
+                selectedUser={selectedUser}
+            />
 
             <div className="md:flex md:items-center mb-6">
                 <div className="md:w-1/3"></div>

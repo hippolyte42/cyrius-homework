@@ -9,7 +9,7 @@ export type User = {
     lastName: string
     email: string
     orgId: string
-    labels: string
+    labels: string[]
 }
 
 export type GetOrganisationsData = {
@@ -23,7 +23,7 @@ export type GetOrganisationUsersData = {
     last_name: string
     email: string
     org: string
-    labels: string
+    labels: string[]
 }
 
 export type UserInputs = {
@@ -31,5 +31,5 @@ export type UserInputs = {
     lastName?: string
     email?: string
     orgId?: string
-    labels?: string
+    labels?: string[]
 }

@@ -58,7 +58,7 @@ export const UserTable = ({
                             )}
                             {!isMenuOpen && (
                                 <td className="border px-4 py-2">
-                                    {user.labels}
+                                    {user.labels.join(', ')}
                                 </td>
                             )}
                             {!isMenuOpen && (
