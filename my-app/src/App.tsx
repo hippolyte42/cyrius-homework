@@ -1,108 +1,20 @@
-import { useEffect, useState } from 'react'
-import { ReactComponent as EditIcon } from './assets/edit.svg'
+import { useState } from 'react'
 import { DeleteUserButton } from './components/DeleteUserButton/DeleteUserButton'
 import { UserForm } from './components/UserForm/UserForm'
 import { UserTable } from './components/UserTable/UserTable'
-import {
-    GetOrganisationsData,
-    GetOrganisationUsersData,
-    Organisation,
-    User,
-    UserInputs,
-} from './types/types'
+import { useOrganisations } from './hooks/useOrganisations'
+import { useOrganisationUsers } from './hooks/useOrganisationUsers'
+import { User, UserInputs } from './types/types'
 
 function App() {
-    const [organisations, setOrganisations] = useState<Organisation[]>([])
-    const [users, setUsers] = useState<User[]>()
-    const [organisationPage, setOrganisationPage] = useState<number>(0)
-
+    const { organisations } = useOrganisations()
+    const { users, setUsers } = useOrganisationUsers(
+        organisations.length ? organisations[0].id : undefined
+    )
     const [selectedUser, setSelectedUser] = useState<User>()
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
     const [isFormReadOnly, setIsFormReadOnly] = useState<boolean>(true)
-
     const [inputs, setInputs] = useState<UserInputs>()
-
-    useEffect(() => {
-        fetch(
-            `http://localhost:3000/orgs?` +
-                new URLSearchParams({
-                    page: organisationPage.toString(),
-                    per_page: '50',
-                })
-        ) // GET /orgs/:orgId/users?page&per_page
-            .then((response) => response.json())
-            .then((resData) => {
-                console.log('GetOrganisationsRes', resData)
-                if (organisations) {
-                    setOrganisations([
-                        ...organisations,
-                        ...resData.data.map((org: GetOrganisationsData) => {
-                            return {
-                                id: org.id,
-                                name: org.name,
-                            }
-                        }),
-                    ])
-                } else {
-                    setOrganisations(
-                        resData.data.map((org: GetOrganisationsData) => {
-                            return {
-                                id: org.id,
-                                name: org.name,
-                            }
-                        })
-                    )
-                }
-            })
-            .catch((err) => {
-                console.error(err.message)
-            })
-    }, [])
-
-    useEffect(() => {
-        fetch(
-            `http://localhost:3000/orgs/${'testOrg'}/users?` +
-                new URLSearchParams({
-                    page: organisationPage.toString(),
-                    per_page: '50',
-                })
-        ) // GET /orgs/:orgId/users?page&per_page
-            .then((response) => response.json())
-            .then((resData) => {
-                console.log('GetOrganisationUsersRes', resData)
-                if (users) {
-                    setUsers([
-                        ...users,
-                        ...resData.data.map((u: GetOrganisationUsersData) => {
-                            return {
-                                id: u.id,
-                                firstName: u.first_name,
-                                lastName: u.last_name,
-                                email: u.email,
-                                org: u.org,
-                                labels: u.labels,
-                            }
-                        }),
-                    ])
-                } else {
-                    setUsers(
-                        resData.data.map((u: GetOrganisationUsersData) => {
-                            return {
-                                id: u.id,
-                                firstName: u.first_name,
-                                lastName: u.last_name,
-                                email: u.email,
-                                org: u.org,
-                                labels: u.labels,
-                            }
-                        })
-                    )
-                }
-            })
-            .catch((err) => {
-                console.error(err.message)
-            })
-    }, [organisations])
 
     return (
         <div className="App">
@@ -156,7 +68,7 @@ function App() {
                                     : 'bg-slate-500'
                             } rounded-xl w-[48px] h-[48px] cursor-pointer m-8 shadow`}
                         >
-                            <EditIcon />
+                            <img src={'./edit.svg'} />
                         </div>
 
                         <UserForm

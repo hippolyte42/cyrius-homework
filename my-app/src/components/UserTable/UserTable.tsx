@@ -53,11 +53,7 @@ export const UserTable = ({
 
                             {!isMenuOpen && (
                                 <td className="border px-4 py-2">
-                                    {organisations.find(
-                                        (o: Organisation) => o.id === user.orgId
-                                    )?.name ||
-                                        (organisations.length &&
-                                            organisations[0].name)}
+                                    {organisations[0].name}
                                 </td>
                             )}
                             {!isMenuOpen && (
