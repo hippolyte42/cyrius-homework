@@ -21,13 +21,13 @@ export const useOrganisationUsers = (organisationId: string | undefined) => {
                         setUsers([
                             ...users,
                             ...resData.data.map(
-                                (u: GetOrganisationUsersData) => {
+                                (u: GetOrganisationUsersData): User => {
                                     return {
                                         id: u.id,
                                         firstName: u.first_name,
                                         lastName: u.last_name,
                                         email: u.email,
-                                        org: u.org,
+                                        orgId: u.org,
                                         labels: u.labels,
                                     }
                                 }
@@ -35,16 +35,18 @@ export const useOrganisationUsers = (organisationId: string | undefined) => {
                         ])
                     } else {
                         setUsers(
-                            resData.data.map((u: GetOrganisationUsersData) => {
-                                return {
-                                    id: u.id,
-                                    firstName: u.first_name,
-                                    lastName: u.last_name,
-                                    email: u.email,
-                                    org: u.org,
-                                    labels: u.labels,
+                            resData.data.map(
+                                (u: GetOrganisationUsersData): User => {
+                                    return {
+                                        id: u.id,
+                                        firstName: u.first_name,
+                                        lastName: u.last_name,
+                                        email: u.email,
+                                        orgId: u.org,
+                                        labels: u.labels,
+                                    }
                                 }
-                            })
+                            )
                         )
                     }
                 })
