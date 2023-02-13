@@ -61,6 +61,7 @@ function App() {
                             </svg>
                         </button>
                         <div
+                            id="editButton"
                             onClick={() => setIsFormReadOnly(!isFormReadOnly)}
                             className={`${
                                 isFormReadOnly

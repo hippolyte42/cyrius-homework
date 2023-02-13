@@ -8,10 +8,8 @@
     "@mui/base": "^5.0.0-alpha.117",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.8",
-    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
@@ -25,13 +23,15 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:unit": "react-scripts test",
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:codegen": "npx playwright codegen http://localhost:3001"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^1.4.1",
+    "@playwright/test": "^1.30.0",
     "eslint-config-prettier": "8.6.0",
     "prettier": "2.8.3"
   },

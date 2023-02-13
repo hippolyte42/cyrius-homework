@@ -32,10 +32,9 @@ export const UserTable = ({
             </thead>
             <tbody>
                 {users &&
-                    users.map((user: User) => (
+                    users.map((user: User, i: number) => (
                         <tr
-                            key={user.id}
-                            className=""
+                            key={i}
                             onClick={() => {
                                 isMenuOpen && setSelectedUser(user)
                                 setInputs(undefined)
@@ -63,15 +62,17 @@ export const UserTable = ({
                             )}
                             {!isMenuOpen && (
                                 <td
-                                    className="border px-4 py-2 cursor-pointer"
-                                    onClick={() => {
-                                        setIsMenuOpen(true)
-                                        setSelectedUser(user)
-                                        setInputs(undefined)
-                                        setIsFormReadOnly(true)
-                                    }}
+                                    key={`action-${i}`}
+                                    className="border px-4 py-2"
                                 >
-                                    <button>
+                                    <button
+                                        onClick={() => {
+                                            setIsMenuOpen(true)
+                                            setSelectedUser(user)
+                                            setInputs(undefined)
+                                            setIsFormReadOnly(true)
+                                        }}
+                                    >
                                         <img
                                             src={'./open_in_new.svg'}
                                             alt="Your SVG"

@@ -176,7 +176,7 @@ export default function LabelsComboBox({
         value,
         setAnchorEl,
     } = useAutocomplete({
-        id: 'cyrius-labels-combobox',
+        id: 'labels',
         value: selectedUserLabelsInput,
         multiple: true,
         options: selectedUserLabelsInput || [],
@@ -185,6 +185,8 @@ export default function LabelsComboBox({
         onChange: (event, newValue) => {
             handleChange(event, newValue)
         },
+        autoSelect: false,
+        includeInputInList: true,
     })
 
     const handleChange = (
