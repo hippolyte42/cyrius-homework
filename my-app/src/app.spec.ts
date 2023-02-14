@@ -1,8 +1,8 @@
-import { test, expect } from '@playwright/test'
+import { test } from '@playwright/test'
 import { waitForResponse } from './tests/testUtils'
 
 test.describe('app tests', () => {
-    test('app should load', async ({ page }) => {
+    test('load', async ({ page }) => {
         await page.goto('/')
 
         await waitForResponse(page, '/orgs?')

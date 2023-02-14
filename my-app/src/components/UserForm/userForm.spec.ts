@@ -5,43 +5,47 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/')
 })
 
-test.describe('userForm should work', () => {
-    test('should edit user', async ({ page }) => {
-        await waitForResponse(page, '/users?', '')
+test.describe('userForm', () => {
+    test('edited submited & response valid', async ({ page }) => {
+        await waitForResponse(page, '/users?')
+
+        const newFirstNameInput = 'new firstname'
+        const newLastNameInput = 'new lastname'
+        const newEmailInput = 'new.email@test.xyz'
+        const newOrgIdInput = '12345'
 
         await page.locator(`td > button`).first().click()
         await page.locator('#editButton').click()
 
-        await Promise.all([
-            page.locator('#firstname').fill('new firstname'),
-            page.locator('#lastname').fill('new lastname'),
-            page.locator('#email').fill('new.email@test.xyz'),
-            page.locator('#orgid').fill('12345'),
-            page.locator('#labels').click(),
-            page.locator('#labels').fill('test'),
-            page.locator('#labels').press('Enter'),
-            page.getByRole('button', { name: 'Modifier' }).click(),
-        ])
+        await page.locator('#firstname').fill(newFirstNameInput)
+        await page.locator('#lastname').fill(newLastNameInput)
+        await page.locator('#email').fill(newEmailInput)
+        await page.locator('#orgid').fill(newOrgIdInput)
+        await page.locator('#labels').click()
+        await page.locator('#labels').fill('test')
+        await page.locator('#labels').press('Enter')
+        await page.getByRole('button', { name: 'Modifier' }).click()
 
-        // todo: check response for edited user data
-        await waitForResponse(page, '/users/')
+        await waitForResponse(
+            page,
+            '/users/'
+            // get labels text and compare to expected
+            // JSON.stringify({
+            //     first_name: newFirstNameInput,
+            //     last_name: newLastNameInput,
+            //     email: newEmailInput,
+            //     org: newOrgIdInput,
+            // })
+        )
 
-        // todo close menu button
-        await page.getByRole('button').first().click()
+        await page.locator('#closeButton').first().click()
 
-        expect(page.getByRole('cell', { name: 'new firstname' })).toBeDefined()
-        expect(page.getByRole('cell', { name: 'new lastname' })).toBeDefined()
         expect(
-            page.getByRole('cell', { name: 'new.email@test.xyz' })
+            page.getByRole('cell', { name: newFirstNameInput })
         ).toBeDefined()
-        // todo orgid
-        // expect(page.getByRole('cell', { name: '12345' })).toBeDefined()
-
-        // todo labels
-        // await page
-        //     .getByRole('cell', {
-        //         name: 'Yadira, Dino, Tillman, Reinhold, Myrtice, test',
-        //     })
-        //     .click()
+        expect(page.getByRole('cell', { name: newLastNameInput })).toBeDefined()
+        expect(page.getByRole('cell', { name: newEmailInput })).toBeDefined()
+        // expect(page.getByRole('cell', { name: newOrgIdInput })).toBeDefined()
+        expect(page.getByText(', test')).toBeDefined
     })
 })

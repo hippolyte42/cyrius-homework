@@ -41,6 +41,7 @@ function App() {
                         } transition duration-500 m-0`}
                     >
                         <button
+                            id="closeButton"
                             onClick={() => setIsMenuOpen(false)}
                             className="m-4"
                         >
