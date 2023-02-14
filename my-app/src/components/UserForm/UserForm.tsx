@@ -30,17 +30,13 @@ export const UserForm = ({
                 `http://localhost:3000/orgs/${selectedUser.orgId}/users/${selectedUser.id}`, //  /orgs/:oid/users/:uid?mask=first_name,email
                 {
                     method: 'PATCH',
-                    body: JSON.stringify(`{
-                        "first_name": "${
-                            inputs?.firstName || selectedUser.firstName
-                        }",
-                        "last_name": "${
-                            inputs?.lastName || selectedUser.lastName
-                        }",
-                        "email": "${inputs?.email || selectedUser.email}",
-                        "org": "${inputs?.orgId || selectedUser.orgId}"
-                        "labels": "${inputs?.labels || selectedUser.labels}"
-                    }`),
+                    body: JSON.stringify({
+                        first_name: inputs?.firstName ?? selectedUser.firstName,
+                        last_name: inputs?.lastName ?? selectedUser.lastName,
+                        email: inputs?.email ?? selectedUser.email,
+                        org: inputs?.orgId ?? selectedUser.orgId,
+                        labels: inputs?.labels ?? selectedUser.labels,
+                    }),
                     headers: {
                         'Content-type': 'application/json; charset=UTF-8',
                     },
@@ -49,20 +45,25 @@ export const UserForm = ({
                 .then((response) => response.json())
                 .then((res) => {
                     console.log('patchOrganisationUser', res)
-                    // add code to update the user in the users array using queryParams in Mockoon
-                    setSelectedUser({ ...selectedUser, ...inputs })
-                    if (users) {
-                        const newUsers = users.map((u: User) => {
-                            if (u.id === selectedUser.id) {
-                                return {
-                                    ...u,
-                                    ...inputs,
-                                }
-                            }
-                            return u
-                        })
-                        setUsers(newUsers)
+                    const updatedUserFields: Partial<User> = {
+                        firstName: res.first_name,
+                        lastName: res.last_name,
+                        email: res.email,
+                        orgId: res.org,
+                        labels: res.labels,
                     }
+
+                    setSelectedUser({ ...selectedUser, ...updatedUserFields })
+                    const newUsers = users?.map((u: User) => {
+                        if (u.id === selectedUser.id) {
+                            return {
+                                ...u,
+                                ...updatedUserFields,
+                            }
+                        }
+                        return u
+                    })
+                    setUsers(newUsers)
                 })
                 .catch((err) => {
                     console.error(err.message)
