@@ -158,13 +158,14 @@ interface LabelsComboBoxProps {
     isFormReadOnly: boolean
     selectedUserLabelsInput: string[]
     setInputs: React.Dispatch<React.SetStateAction<UserInputs | undefined>>
-    selectedUser: User | undefined
+    organisationLabels: string[] | undefined
 }
 
 export default function LabelsComboBox({
     isFormReadOnly,
     selectedUserLabelsInput,
     setInputs,
+    organisationLabels,
 }: LabelsComboBoxProps) {
     const {
         getRootProps,
@@ -179,7 +180,9 @@ export default function LabelsComboBox({
         id: 'labels',
         value: selectedUserLabelsInput,
         multiple: true,
-        options: selectedUserLabelsInput || [],
+        options: organisationLabels
+            ? [...selectedUserLabelsInput, ...organisationLabels]
+            : selectedUserLabelsInput,
         getOptionLabel: (option) => option,
         freeSolo: true,
         onChange: (event, newValue) => {

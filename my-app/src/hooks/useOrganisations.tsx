@@ -3,6 +3,7 @@ import { GetOrganisationsData, Organisation } from '../types/types'
 
 export const useOrganisations = () => {
     const [organisations, setOrganisations] = useState<Organisation[]>([])
+    const [organisationLabels, setOrganisationLabels] = useState<string[]>()
     const [organisationPage, setOrganisationPage] = useState<number>(0)
 
     useEffect(() => {
@@ -42,5 +43,22 @@ export const useOrganisations = () => {
             })
     }, [])
 
-    return { organisations }
+    useEffect(() => {
+        {
+            organisations.length &&
+                fetch(
+                    `http://localhost:3000/orgs/${organisations[0].id}/labels`
+                ) // GET /orgs/:oid/labels
+                    .then((response) => response.json())
+                    .then((resData) => {
+                        console.log('GetOrganisationsLabelsRes', resData)
+                        setOrganisationLabels(resData.data)
+                    })
+                    .catch((err) => {
+                        console.error(err.message)
+                    })
+        }
+    }, [organisations])
+
+    return { organisations, organisationLabels }
 }

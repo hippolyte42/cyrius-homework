@@ -9,6 +9,7 @@ interface UserFormProps {
     users: User[]
     setInputs: React.Dispatch<React.SetStateAction<UserInputs | undefined>>
     isFormReadOnly: boolean
+    organisationLabels: string[] | undefined
 }
 
 export const UserForm = ({
@@ -19,12 +20,12 @@ export const UserForm = ({
     users,
     setInputs,
     isFormReadOnly,
+    organisationLabels,
 }: UserFormProps) => {
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (
         event: React.FormEvent<HTMLFormElement>
     ) => {
         event.preventDefault()
-        console.log('handleSubmit', inputs)
         if (selectedUser) {
             fetch(
                 `http://localhost:3000/orgs/${selectedUser.orgId}/users/${selectedUser.id}`, //  /orgs/:oid/users/:uid?mask=first_name,email
@@ -44,7 +45,6 @@ export const UserForm = ({
             )
                 .then((response) => response.json())
                 .then((res) => {
-                    console.log('patchOrganisationUser', res)
                     const updatedUserFields: Partial<User> = {
                         firstName: res.first_name,
                         lastName: res.last_name,
@@ -54,6 +54,7 @@ export const UserForm = ({
                     }
 
                     setSelectedUser({ ...selectedUser, ...updatedUserFields })
+
                     const newUsers = users?.map((u: User) => {
                         if (u.id === selectedUser.id) {
                             return {
@@ -184,32 +185,12 @@ export const UserForm = ({
                     />
                 </div>
             </div>
-            {/* <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                        Labels
-                    </label>
-                </div>
-                <div className="md:w-2/3">
-                    <input
-                        className={`${
-                            isFormReadOnly ? '' : 'focus:bg-white'
-                        } bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
-                        type="text"
-                        placeholder={selectedUser?.labels.join()}
-                        readOnly={isFormReadOnly}
-                        name="labels"
-                        onChange={handleChange}
-                        value={inputs?.labels || ''}
-                    />
-                </div>
-            </div> */}
 
             <LabelsComboBox
                 isFormReadOnly={isFormReadOnly}
                 selectedUserLabelsInput={inputs?.labels || selectedUser.labels}
                 setInputs={setInputs}
-                selectedUser={selectedUser}
+                organisationLabels={organisationLabels}
             />
 
             <div className="md:flex md:items-center mb-6">

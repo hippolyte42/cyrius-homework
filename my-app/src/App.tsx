@@ -7,7 +7,7 @@ import { useOrganisationUsers } from './hooks/useOrganisationUsers'
 import { User, UserInputs } from './types/types'
 
 function App() {
-    const { organisations } = useOrganisations()
+    const { organisations, organisationLabels } = useOrganisations()
     const { users, setUsers } = useOrganisationUsers(
         organisations.length ? organisations[0].id : undefined
     )
@@ -81,6 +81,7 @@ function App() {
                             users={users}
                             setUsers={setUsers}
                             setSelectedUser={setSelectedUser}
+                            organisationLabels={organisationLabels}
                         />
 
                         <div className="md:flex md:items-center mb-6 w-full max-w-4xl">
