@@ -3,7 +3,7 @@
 ---
 ## Requirements
 
-For development, you will need [Node.js](https://nodejs.org/en/download/) installed in your environement and [Mockoon](https://mockoon.com/) to mock your API.
+For development, you will need [Node.js](https://nodejs.org/en/download/) installed in your environement & an API running with the expect routes (I use [Mockoon](https://mockoon.com/) to mock one).
 
 ## Running the project
     
