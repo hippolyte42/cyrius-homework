@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { waitForResponse } from '../../tests/testUtils'
+import { waitForResponse } from '../../utils/testUtils'
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/')

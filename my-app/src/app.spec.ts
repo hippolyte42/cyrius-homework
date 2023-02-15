@@ -1,5 +1,5 @@
 import { test } from '@playwright/test'
-import { waitForResponse } from './tests/testUtils'
+import { waitForResponse } from './utils/testUtils'
 
 test.describe('app tests', () => {
     test('load', async ({ page }) => {
