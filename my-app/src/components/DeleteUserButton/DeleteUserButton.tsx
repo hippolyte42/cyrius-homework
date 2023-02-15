@@ -28,8 +28,7 @@ export const DeleteUserButton = ({
             }
         ) //  /orgs/:oid/users/:uid
             .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
+            .then(() => {
                 setIsMenuOpen(false)
                 setIsFormReadOnly(true)
                 setInputs(undefined)
@@ -41,7 +40,7 @@ export const DeleteUserButton = ({
                 }
             })
             .catch((err) => {
-                console.log(err.message)
+                console.error(err.message)
             })
     }
 

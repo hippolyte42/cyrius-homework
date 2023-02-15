@@ -6,7 +6,6 @@ export const useOrganisationUsers = (organisationId: string | undefined) => {
 
     useEffect(() => {
         if (organisationId) {
-            console.log('organisationId', organisationId)
             fetch(
                 `http://localhost:3000/orgs/${organisationId}/users?` +
                     new URLSearchParams({
@@ -16,7 +15,6 @@ export const useOrganisationUsers = (organisationId: string | undefined) => {
             ) // GET /orgs/:orgId/users?page&per_page
                 .then((response) => response.json())
                 .then((resData) => {
-                    console.log('GetOrganisationUsersRes', resData)
                     if (users) {
                         setUsers([
                             ...users,

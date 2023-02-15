@@ -220,7 +220,7 @@ export default function LabelsComboBox({
                                     label={option}
                                     {...getTagProps({ index })}
                                     onDelete={() =>
-                                        console.log(
+                                        console.warn(
                                             "can't delete label in read only mode"
                                         )
                                     }

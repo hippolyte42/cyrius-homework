@@ -16,7 +16,6 @@ export const useOrganisations = () => {
         ) // GET /orgs/:orgId/users?page&per_page
             .then((response) => response.json())
             .then((resData) => {
-                console.log('GetOrganisationsRes', resData)
                 if (organisations) {
                     setOrganisations([
                         ...organisations,
@@ -51,7 +50,6 @@ export const useOrganisations = () => {
                 ) // GET /orgs/:oid/labels
                     .then((response) => response.json())
                     .then((resData) => {
-                        console.log('GetOrganisationsLabelsRes', resData)
                         setOrganisationLabels(resData.data)
                     })
                     .catch((err) => {
