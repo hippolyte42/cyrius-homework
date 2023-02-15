@@ -47,6 +47,7 @@ export const DeleteUserButton = ({
 
     return (
         <button
+            id="deleteUserButton"
             className="bg-red-500 hover:bg-red-400 rounded text-white shadow font-bold py-2 px-4"
             onClick={() => {
                 deleteUser()
