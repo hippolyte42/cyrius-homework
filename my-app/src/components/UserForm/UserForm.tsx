@@ -83,7 +83,6 @@ export const UserForm = ({
         }))
     }
 
-    // todo make input bg-white on isFormReadOnly false
     return (
         <form className="max-w-4xl" onSubmit={handleSubmit}>
             <div className="md:flex md:items-center mb-6">
@@ -111,8 +110,8 @@ export const UserForm = ({
                     <input
                         id="firstname"
                         className={`${
-                            isFormReadOnly ? '' : 'focus:bg-white'
-                        } bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
+                            isFormReadOnly ? 'bg-gray-200' : 'bg-white'
+                        } appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
                         type="text"
                         placeholder={selectedUser?.firstName}
                         readOnly={isFormReadOnly}
@@ -132,8 +131,8 @@ export const UserForm = ({
                     <input
                         id="lastname"
                         className={`${
-                            isFormReadOnly ? '' : 'focus:bg-white'
-                        } bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
+                            isFormReadOnly ? 'bg-gray-200' : 'bg-white'
+                        } appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
                         type="text"
                         placeholder={selectedUser?.lastName}
                         readOnly={isFormReadOnly}
@@ -153,8 +152,8 @@ export const UserForm = ({
                     <input
                         id="email"
                         className={`${
-                            isFormReadOnly ? '' : 'focus:bg-white'
-                        } bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
+                            isFormReadOnly ? 'bg-gray-200' : 'bg-white'
+                        } appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
                         type="text"
                         placeholder={selectedUser?.email}
                         readOnly={isFormReadOnly}
@@ -174,8 +173,8 @@ export const UserForm = ({
                     <input
                         id="orgid"
                         className={`${
-                            isFormReadOnly ? '' : 'focus:bg-white'
-                        } bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
+                            isFormReadOnly ? 'bg-gray-200' : 'bg-white'
+                        } appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
                         type="text"
                         placeholder={selectedUser?.orgId}
                         readOnly={isFormReadOnly}
