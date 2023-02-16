@@ -7,44 +7,36 @@ import CloseIcon from '@mui/icons-material/Close'
 import { autocompleteClasses } from '@mui/material/Autocomplete'
 import { styled } from '@mui/material/styles'
 import * as React from 'react'
-import { User, UserInputs } from '../../types/types'
+import { UserInputs } from '../../types/types'
 
 const Root = styled('div')(
-    ({ theme }: any) => `
-  color: ${
-      theme.palette.mode === 'dark'
-          ? 'rgba(255,255,255,0.65)'
-          : 'rgba(0,0,0,.85)'
-  };
+    () => `
+  color: 'rgba(0,0,0,.85)';
   font-size: 14px;
 `
 )
 
 const InputWrapper = styled('div')(
-    ({ theme }: any) => `
-  border: 1px solid ${theme.palette.mode === 'dark' ? '#434343' : '#d9d9d9'};
-  background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
+    () => `
+  border: 1px solid '#d9d9d9';
+  background-color: '#fff';
   border-radius: 4px;
   padding: 1px;
   display: flex;
   flex-wrap: wrap;
 
   &:hover {
-    border-color: ${theme.palette.mode === 'dark' ? '#177ddc' : '#40a9ff'};
+    border-color: '#40a9ff';
   }
 
   &.focused {
-    border-color: ${theme.palette.mode === 'dark' ? '#177ddc' : '#40a9ff'};
+    border-color: '#40a9ff';
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
   }
 
   & input {
-    background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
-    color: ${
-        theme.palette.mode === 'dark'
-            ? 'rgba(255,255,255,0.65)'
-            : 'rgba(0,0,0,.85)'
-    };
+    background-color: '#fff';
+    color: 'rgba(0,0,0,.85)';
     box-sizing: border-box;
     padding: 4px 6px;
     width: 0;
@@ -72,16 +64,14 @@ function Tag(props: TagProps) {
 }
 
 const StyledTag = styled(Tag)<TagProps>(
-    ({ theme }: any) => `
+    () => `
   display: flex;
   align-items: center;
   height: 24px;
   margin: 2px;
   line-height: 22px;
-  background-color: ${
-      theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : '#fafafa'
-  };
-  border: 1px solid ${theme.palette.mode === 'dark' ? '#303030' : '#e8e8e8'};
+  background-color: '#fafafa';
+  border: 1px solid '#e8e8e8';
   border-radius: 2px;
   box-sizing: content-box;
   padding: 0 4px 0 10px;
@@ -89,8 +79,8 @@ const StyledTag = styled(Tag)<TagProps>(
   overflow: hidden;
 
   &:focus {
-    border-color: ${theme.palette.mode === 'dark' ? '#177ddc' : '#40a9ff'};
-    background-color: ${theme.palette.mode === 'dark' ? '#003b57' : '#e6f7ff'};
+    border-color: '#40a9ff';
+    background-color: '#e6f7ff';
   }
 
   & span {
@@ -108,13 +98,13 @@ const StyledTag = styled(Tag)<TagProps>(
 )
 
 const Listbox = styled('ul')(
-    ({ theme }) => `
+    () => `
   width: 300px;
   margin: 2px 0 0;
   padding: 0;
   position: absolute;
   list-style: none;
-  background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
+  background-color: '#fff';
   overflow: auto;
   max-height: 250px;
   border-radius: 4px;
@@ -135,7 +125,7 @@ const Listbox = styled('ul')(
   }
 
   & li[aria-selected='true'] {
-    background-color: ${theme.palette.mode === 'dark' ? '#2b2b2b' : '#fafafa'};
+    background-color: '#fafafa';
     font-weight: 600;
 
     & svg {
@@ -144,7 +134,7 @@ const Listbox = styled('ul')(
   }
 
   & li.${autocompleteClasses.focused} {
-    background-color: ${theme.palette.mode === 'dark' ? '#003b57' : '#e6f7ff'};
+    background-color: '#e6f7ff';
     cursor: pointer;
 
     & svg {
@@ -246,17 +236,6 @@ export default function LabelsComboBox({
                             ))}
                         </Listbox>
                     ) : null}
-                    {/* <input
-                        className={`${
-                            isFormReadOnly ? '' : 'focus:bg-white'
-                        } bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none  focus:border-blue-500`}
-                        type="text"
-                        placeholder={selectedUser?.labels}
-                        readOnly={isFormReadOnly}
-                        name="labels"
-                        onChange={handleChange}
-                        value={inputs?.labels || ''}
-                    /> */}
                 </div>
             </div>
         </Root>
